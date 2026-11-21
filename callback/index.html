@@ -1,6 +1,13 @@
 <!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tesla sign-in done</title>
-<body style="font-family:-apple-system,sans-serif;padding:24px;font-size:18px">
-<h2>Tesla sign-in complete</h2><p>Tap the button, then paste into the secure box in Grok Bot.</p>
-<textarea id="c" readonly style="width:100%;height:120px;font-size:16px"></textarea><br><br>
-<button onclick="navigator.clipboard.writeText(document.getElementById('c').value);this.textContent='Copied'" style="font-size:20px;padding:12px 24px">Copy code</button>
-<script>var p=new URLSearchParams(location.search);document.getElementById('c').value=p.get('code')||('Error: '+(p.get('error_description')||p.get('error')||'no code'));</script></body>
+<body style="font-family:-apple-system,sans-serif;padding:20px;font-size:18px">
+<h2>Tesla sign-in complete</h2>
+<p id="n"></p>
+<textarea id="c" readonly style="width:100%;height:160px;font-size:16px;word-break:break-all"></textarea><br><br>
+<button id="b" style="font-size:22px;padding:14px 28px">Copy code</button>
+<p>Then paste it into the secure box in Grok Bot right away.</p>
+<script>
+var p=new URLSearchParams(location.search),c=document.getElementById('c'),v=p.get('code')||('Error: '+(p.get('error_description')||p.get('error')||'no code in link'));
+c.value=v;document.getElementById('n').textContent='Code length: '+v.length+' characters';
+document.getElementById('b').onclick=function(){c.focus();c.select();c.setSelectionRange(0,99999);var ok=false;try{ok=document.execCommand('copy')}catch(e){}
+if(navigator.clipboard){navigator.clipboard.writeText(v).then(()=>{},()=>{})}this.textContent='Copied ('+v.length+' chars)'};
+</script></body>
