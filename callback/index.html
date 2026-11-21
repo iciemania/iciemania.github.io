@@ -1,0 +1,6 @@
+<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tesla sign-in done</title>
+<body style="font-family:-apple-system,sans-serif;padding:24px;font-size:18px">
+<h2>Tesla sign-in complete</h2><p>Tap the button, then paste into the secure box in Grok Bot.</p>
+<textarea id="c" readonly style="width:100%;height:120px;font-size:16px"></textarea><br><br>
+<button onclick="navigator.clipboard.writeText(document.getElementById('c').value);this.textContent='Copied'" style="font-size:20px;padding:12px 24px">Copy code</button>
+<script>var p=new URLSearchParams(location.search);document.getElementById('c').value=p.get('code')||('Error: '+(p.get('error_description')||p.get('error')||'no code'));</script></body>
